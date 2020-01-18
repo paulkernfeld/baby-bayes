@@ -1,0 +1,24 @@
+[tasks.readme]
+install_crate = "readme"
+command = "cargo"
+args = ["readme", "-o", "README.md"]
+
+[tasks.doc-katex]
+env = { "RUSTDOCFLAGS" = "--html-in-header katex-header.html" }
+command = "cargo"
+args = ["doc", "--no-deps"]
+
+[tasks.doc-all]
+dependencies = [
+    "docs",
+    "doc-katex",
+]
+
+[tasks.all]
+dependencies = [
+    "test",
+    "clippy",
+    "format",
+    "readme",
+    "doc-all",
+]
